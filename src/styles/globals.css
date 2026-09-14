@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-h-full bg-zinc-950 text-zinc-100 antialiased;
+  }
+
+  body {
+    font-family: Manrope, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+
+  ::selection {
+    background: rgba(52, 211, 153, 0.28);
+    color: #ecfdf5;
+  }
+}
+
+@layer components {
+  .hero-title {
+    --glow: 0;
+    text-shadow:
+      0 0 calc(18px * var(--glow)) rgba(52, 211, 153, 0.95),
+      0 0 calc(48px * var(--glow)) rgba(52, 211, 153, 0.55),
+      0 0 calc(110px * var(--glow)) rgba(16, 185, 129, 0.28);
+  }
+
+}
+
+@layer utilities {
+  .text-neon {
+    color: #34d399;
+    text-shadow:
+      0 0 18px rgba(52, 211, 153, 0.7),
+      0 0 48px rgba(52, 211, 153, 0.28);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #34d399;
+}
+
+.font-display {
+  font-family: Inter, Manrope, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

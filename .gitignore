@@ -1,0 +1,16 @@
+node_modules
+dist
+.DS_Store
+*.local
+.vite
+
+# MConverter frame dump — the site plays the encoded reel
+/[0-9][0-9][0-9][0-9][0-9].png
+public/frames/
+
+# Unused or oversized scratch media
+public/media/untitled-scene-*.mp4
+public/media/untitled-scene-poster.jpg
+public/media/waygo-city-sky-src.mp4
+public/media/waygo-reel.mp4
+tmp-scene-inspect/
