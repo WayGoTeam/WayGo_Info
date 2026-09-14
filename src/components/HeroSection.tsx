@@ -3,12 +3,12 @@ import { gsap, ScrollTrigger, useGSAP } from "../lib/gsap";
 import { reelVideo, stills } from "../lib/media";
 
 const CAPTIONS = [
-  { start: 0, end: 0.17, lead: "91.6%", rest: "AI dəqiqliyi" },
-  { start: 0.17, end: 0.26, lead: "39 dəq", rest: "gecikmə" },
+  { start: 0, end: 0.17, lead: "91.6%", rest: "test R²" },
+  { start: 0.17, end: 0.26, lead: "39 dəq", rest: "adi xəritə" },
   { start: 0.26, end: 0.34, lead: "21 dəq", rest: "WayGo" },
-  { start: 0.34, end: 0.49, lead: "EcoPoints", rest: "SOCAR" },
+  { start: 0.34, end: 0.49, lead: "EcoPoints", rest: "vauçer" },
   { start: 0.49, end: 0.63, lead: "22%", rest: "yanacaq qənaəti" },
-  { start: 0.63, end: 1, lead: "WayGo", rest: "şəbəkə" },
+  { start: 0.63, end: 1, lead: "WayGo", rest: "Bakı" },
 ] as const;
 
 function captionIndex(progress: number) {

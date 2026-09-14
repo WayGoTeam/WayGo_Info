@@ -8,37 +8,37 @@ const STACK = [
     image: stills.bakuAccuracy,
     kicker: "Model",
     title: "LightGBM proqnoz mühərriki",
-    body: "2 saatlıq tıxac ehtimalı. Test R² 0.916. Reaksiya yox — ehtimal paylanması.",
+    body: "İki saatlıq tıxac ehtimalı. Test R² 0.916. Reaksiya yox — ehtimal paylanması.",
   },
   {
     image: stills.ecoRoute,
     kicker: "Alqoritm",
-    title: "Split-routing",
-    body: "39 dəqiqəlik tıxac kadrı 21 dəqiqəlik yaşıl marşruta çevrilir. Rebound yoxdur.",
+    title: "Bölünmüş marşrut",
+    body: "Valhalla yolu qiymətləndirir, WayGo tıxac və qəza cəriməsini qoyur. Axın 2–3 paralel yola bölünür.",
   },
   {
     image: stills.metricsHud,
-    kicker: "Data Science",
-    title: "250k Bakı qeydi",
-    body: "HUD-da yanacaq, vaxt və rayon siqnalı. Pipeline FastAPI üzərində.",
+    kicker: "Data",
+    title: "250 min Bakı qeydi",
+    body: "HUD-da yanacaq, vaxt və rayon siqnalı. FastAPI pipeline üzərində öz data qatımız.",
   },
   {
     image: stills.ecoPoints,
-    kicker: "Incentive",
+    kicker: "Mükafat",
     title: "EcoPoints",
-    body: "Canlı xal sayğacı. Yaşıl sürücülük ölçülür, mükafat kadrda görünür.",
+    body: "Yaşıl sürücülük ölçülür. 1000 xal = 10 AZN yanacaq və ya enerji vauçeri.",
   },
   {
-    image: stills.socarVoucher,
-    kicker: "Partnyor",
-    title: "SOCAR vauçeri",
-    body: "1000 xal = 10 AZN. EcoPoints → real yanacaq vauçeri.",
+    image: stills.fuelVoucher,
+    kicker: "Cüzdan",
+    title: "Real vauçer",
+    body: "Xallar kod olur. Sürücü qənaəti nağd vəd yox, yanacaq və enerji vauçeri kimi götürür.",
   },
   {
     image: stills.waygoNetwork,
     kicker: "Arxitektura",
     title: "Milli data qatı",
-    body: "Nəsimi, Yasamal, Səbail. Məlumat Azərbaycanda qalır.",
+    body: "Spring Boot, React, FastAPI. Nəsimi, Yasamal, Səbail. Məlumat Azərbaycanda qalır.",
   },
 ];
 
@@ -57,10 +57,11 @@ export function TechSection() {
           03 · Texnologiyamız
         </p>
         <h2 className="mt-4 font-display text-3xl font-bold md:text-5xl">
-          Alqoritm və data — video kadrlarla.
+          Öz mühərrik, öz data, öz qaydalar.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
-          WayGo-nun arxasında duran AI və Data Science qatı. Kartlar 3D əyilir.
+          Proqnoz, marşrut cəriməsi, EcoPoints və Azərbaycanda qalan data —
+          hamısı öz kodumuzdur.
         </p>
       </div>
 

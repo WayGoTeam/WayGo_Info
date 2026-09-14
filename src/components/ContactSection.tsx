@@ -29,12 +29,22 @@ export function ContactSection() {
         <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-zinc-300">
           Demo, data room və term sheet üçün — bir məktub kifayətdir.
         </p>
-        <a
-          href="mailto:hello@waygo.az"
-          className="mt-12 inline-flex rounded-full border border-emerald-400 bg-emerald-400/15 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-emerald-300 shadow-neon-lg transition hover:bg-emerald-400 hover:text-zinc-950 hover:shadow-neon-lg"
-        >
-          hello@waygo.az
-        </a>
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="mailto:hello@waygo.az"
+            className="inline-flex rounded-full border border-emerald-400 bg-emerald-400/15 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-emerald-300 shadow-neon-lg transition hover:bg-emerald-400 hover:text-zinc-950 hover:shadow-neon-lg"
+          >
+            hello@waygo.az
+          </a>
+          <a
+            href="https://github.com/WayGoTeam"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex rounded-full border border-white/20 bg-zinc-950/40 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-zinc-200 transition hover:border-emerald-400/60 hover:text-emerald-300"
+          >
+            GitHub
+          </a>
+        </div>
       </div>
     </section>
   );

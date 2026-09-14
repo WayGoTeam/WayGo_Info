@@ -10,7 +10,7 @@ const METRICS = [
     suffix: "",
     unit: "dəqiqə",
     label: "Qənaət Olunan Vaxt",
-    hint: "39 dəq tıxac → WayGo 21 dəq. Eyni Bakı yolu, başqa kadr.",
+    hint: "Demo dəhlizi: 28 May → Koroğlu. Adi xəritə 39 dəq, WayGo 21 dəq.",
     image: stills.ecoRoute,
   },
   {
@@ -19,7 +19,7 @@ const METRICS = [
     suffix: "%",
     unit: "yanacaq",
     label: "Azaldılan Karbon Həcmi",
-    hint: "Video HUD: 22% fuel savings. EcoPoints ilə ölçülən qənaət.",
+    hint: "Donanma hekayəsi: yaşıl marşrutla ölçülən yanacaq və karbon qənaəti.",
     image: stills.metricsHud,
   },
   {
@@ -28,7 +28,7 @@ const METRICS = [
     suffix: "%",
     unit: "R²",
     label: "AI Dəqiqliyi",
-    hint: "LightGBM · 2 saatlıq proqnoz · 250k Bakı qeydi.",
+    hint: "LightGBM test R². 2 saatlıq tıxac proqnozu · 250 min Bakı qeydi.",
     image: stills.bakuAccuracy,
   },
 ];
@@ -104,8 +104,8 @@ export function MetricsSection() {
           Rəqəmlər kadrın içinə düşəndə oyanır.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
-          Eyni metrikalar WayGo videosundakı kadrlarla — scroll çatanda sayğac
-          işə düşür.
+          Demo dəhlizi, model testi və donanma hekayəsi — rəqəm kadrın içinə
+          düşəndə oyanır.
         </p>
       </div>
 

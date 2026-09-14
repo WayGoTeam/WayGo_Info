@@ -8,20 +8,20 @@ const BLOCKS = [
   {
     n: "01",
     image: stills.trafficDelay,
-    title: "Şəhər tıxacını azaldırıq",
-    body: "Adi xəritə 39 dəqiqə gecikmə göstərir. WayGo 2 saatlıq ehtimal axını ilə sürücünü tıxac başlamazdan əvvəl bölünmüş marşruta yönləndirir.",
+    title: "Tıxacı qabaqcadan görürük",
+    body: "Adi xəritə tıxacı görəndən sonra hamını eyni küçəyə tökür. WayGo iki saatlıq ehtimal axını ilə sürücünü tıxac yığılmamış bölünmüş yola salır.",
   },
   {
     n: "02",
     image: stills.ecoRoute,
-    title: "Karbon izini kəsirik",
-    body: "Eyni yol 21 dəqiqəyə düşür. Eco-routing və EcoPoints yaşıl seçimi cəza yox, mükafat edir — yanacaq və tüstü azalır.",
+    title: "Yaşıl yolu mükafatlandırırıq",
+    body: "Eco-routing yanacaq və tüstünü kəsir. EcoPoints yaşıl seçimi cəza yox, qazanc edir: 1000 xal = 10 AZN yanacaq və ya enerji vauçeri.",
   },
   {
     n: "03",
     image: stills.bakuAccuracy,
-    title: "AI ilə marşrutlaşdırırıq",
-    body: "LightGBM, 250 min Bakı qeydi, test R² 0.916. Bu, xəritə UI deyil — Bakı üçün qurulmuş proqnoz və data qatı.",
+    title: "Bakı üçün öz AI-mızı yazırıq",
+    body: "LightGBM, 250 min Bakı qeydi, test R² 0.916. Bu, hazır xəritə klonu deyil — özümüz qurduğumuz proqnoz, marşrut və səsli köməkçi qatı.",
   },
 ];
 
@@ -156,15 +156,15 @@ export function AboutVisionSection() {
         >
           Bakı sürücüsü ildə 120–145 saatını tıxacda itirir. Mövcud xəritələr
           gecikir və hamını eyni küçəyə tökür. WayGo ona görə yarandı: tıxacı
-          iki saat əvvəl görəcək, karbonu kəsəcək, şəhərin ritmini oxuyacaq
-          süni intellekt.
+          iki saat əvvəl görəcək, axını böləcək, qənaətə görə real vauçer
+          qazandıracaq milli naviqasiya.
         </p>
         <p
           data-credits-copy
           className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-zinc-400"
         >
-          Missiyamız sadədir: Bakının hərəkətini daha az gözləmə, daha az tüstü,
-          daha ağıllı qərar ilə yazmaq.
+          Missiyamız sadədir: Bakının hərəkətini daha az gözləmə, daha az tüstü
+          və Azərbaycanda qalan data ilə yazmaq. İki həmtəsisçi, öz əlimizlə.
         </p>
         <div
           data-credits-actions
