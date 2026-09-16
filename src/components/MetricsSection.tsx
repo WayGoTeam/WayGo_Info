@@ -138,9 +138,9 @@ export function MetricsSection() {
           const copy = s.metrics.items[index];
           if (!copy) return null;
           return (
-            <div key={metric.image} className="scene-frame">
+            <div key={metric.image} className="scene-frame h-full">
               <TiltCard className="metric-card group">
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div className="relative aspect-[16/10] shrink-0 overflow-hidden">
                   <img
                     src={metric.image}
                     alt=""
@@ -149,7 +149,7 @@ export function MetricsSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
                   <div className="absolute inset-0 bg-leaf/0 transition-colors duration-500 group-hover:bg-leaf/15" />
                 </div>
-                <div className="relative px-6 pb-7 pt-1 transition-colors duration-500 group-hover:bg-forest">
+                <div className="relative flex flex-1 flex-col px-6 pb-7 pt-1 transition-colors duration-500 group-hover:bg-forest">
                   <p className="text-[10px] uppercase tracking-[0.24em] text-paper/45">
                     {copy.unit}
                   </p>
@@ -162,7 +162,7 @@ export function MetricsSection() {
                   <h3 className="mt-5 font-display text-lg font-bold text-white">
                     {copy.label}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-paper/45 transition-colors duration-500 group-hover:text-paper/70">
+                  <p className="mt-2 min-h-[2.75rem] text-sm leading-relaxed text-paper/45 transition-colors duration-500 group-hover:text-paper/70">
                     {copy.hint}
                   </p>
                 </div>

@@ -35,9 +35,9 @@ export function TechSection() {
 
       <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
         {s.tech.items.map((item, index) => (
-          <div key={item.title} className="scene-frame">
+          <div key={item.title} className="scene-frame h-full">
             <TiltCard className="h-full overflow-hidden bg-night p-0">
-              <div className="relative aspect-[16/10]">
+              <div className="relative aspect-[16/10] shrink-0">
                 <img
                   src={STACK_IMAGES[index]}
                   alt=""
@@ -45,14 +45,14 @@ export function TechSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
               </div>
-              <div className="p-6">
+              <div className="flex flex-1 flex-col p-6">
                 <p className="text-[10px] uppercase tracking-[0.24em] text-leaf/70">
                   {item.kicker}
                 </p>
                 <h3 className="mt-2 font-display text-xl font-bold text-white">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-paper/60">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-paper/60">
                   {item.body}
                 </p>
               </div>

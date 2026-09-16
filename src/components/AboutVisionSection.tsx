@@ -153,9 +153,9 @@ export function AboutVisionSection() {
         {s.about.blocks.map((block, index) => (
           <article
             key={block.n}
-            className="scene-frame group overflow-hidden rounded-3xl border border-white/10 bg-night transition duration-500 hover:border-leaf/35 hover:shadow-neon"
+            className="scene-frame group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-night transition duration-500 hover:border-leaf/35 hover:shadow-neon"
           >
-            <div className="relative aspect-[16/10] overflow-hidden">
+            <div className="relative aspect-[16/10] shrink-0 overflow-hidden">
               <div className="h-full w-full overflow-hidden transition duration-700 ease-out group-hover:scale-[1.04]">
                 <img
                   src={BLOCK_IMAGES[index]}
@@ -168,11 +168,11 @@ export function AboutVisionSection() {
                 {block.n}
               </p>
             </div>
-            <div className="p-6 pt-2">
+            <div className="flex flex-1 flex-col p-6 pt-2">
               <h3 className="font-display text-xl font-bold text-white">
                 {block.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-paper/60">
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-paper/60">
                 {block.body}
               </p>
             </div>

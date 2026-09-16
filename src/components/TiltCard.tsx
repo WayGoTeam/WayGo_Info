@@ -69,11 +69,11 @@ export function TiltCard({ children, className }: TiltCardProps) {
   );
 
   return (
-    <div ref={rootRef} className="[perspective:1100px]">
+    <div ref={rootRef} className="h-full [perspective:1100px]">
       <div
         ref={cardRef}
         className={cn(
-          "relative will-change-transform overflow-hidden rounded-3xl border border-white/10 bg-night",
+          "relative h-full will-change-transform overflow-hidden rounded-3xl border border-white/10 bg-night",
           className,
         )}
       >
@@ -95,7 +95,7 @@ export function TiltCard({ children, className }: TiltCardProps) {
               "inset 0 0 0 1px rgba(52,211,153,0.48), inset 0 0 28px rgba(52,211,153,0.08), 0 0 22px rgba(52,211,153,0.14)",
           }}
         />
-        <div className="relative z-20">{children}</div>
+        <div className="relative z-20 flex h-full flex-col">{children}</div>
       </div>
     </div>
   );
