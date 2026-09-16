@@ -1,31 +1,14 @@
 import { useRef } from "react";
+import { useLocale } from "../i18n/LocaleContext";
 import { gsap, useGSAP } from "../lib/gsap";
 import { stills } from "../lib/media";
 import { useSceneFrames } from "../lib/useSceneFrames";
 import { useLenis } from "./SmoothScroll";
 
-const BLOCKS = [
-  {
-    n: "01",
-    image: stills.trafficDelay,
-    title: "Tıxacı qabaqcadan görürük",
-    body: "Adi xəritə tıxacı görəndən sonra hamını eyni küçəyə tökür. WayGo iki saatlıq ehtimal axını ilə sürücünü tıxac yığılmamış bölünmüş yola salır.",
-  },
-  {
-    n: "02",
-    image: stills.ecoRoute,
-    title: "Yaşıl yolu mükafatlandırırıq",
-    body: "Eco-routing yanacaq və tüstünü kəsir. EcoPoints yaşıl seçimi cəza yox, qazanc edir: 1000 xal = 10 AZN yanacaq və ya enerji vauçeri.",
-  },
-  {
-    n: "03",
-    image: stills.bakuAccuracy,
-    title: "Bakı üçün öz AI-mızı yazırıq",
-    body: "LightGBM, 250 min Bakı qeydi, test R² 0.916. Bu, hazır xəritə klonu deyil — özümüz qurduğumuz proqnoz, marşrut və səsli köməkçi qatı.",
-  },
-];
+const BLOCK_IMAGES = [stills.trafficDelay, stills.ecoRoute, stills.bakuAccuracy];
 
 export function AboutVisionSection() {
+  const { s } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
@@ -36,7 +19,6 @@ export function AboutVisionSection() {
       const titleRoot = titleRef.current;
       if (!titleRoot) return;
 
-      const kicker = titleRoot.querySelector<HTMLElement>("[data-credits-kicker]");
       const heading = titleRoot.querySelector<HTMLElement>("[data-credits-title]");
       const copy = titleRoot.querySelectorAll<HTMLElement>("[data-credits-copy]");
       const actions = titleRoot.querySelector<HTMLElement>("[data-credits-actions]");
@@ -45,7 +27,7 @@ export function AboutVisionSection() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        if (kicker && heading && actions) {
+        if (heading && actions) {
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: titleRoot,
@@ -56,11 +38,6 @@ export function AboutVisionSection() {
           });
 
           tl.fromTo(
-            kicker,
-            { autoAlpha: 0, y: 12 },
-            { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" },
-          )
-            .fromTo(
               heading,
               { autoAlpha: 0, y: 16, letterSpacing: "0.12em" },
               {
@@ -70,7 +47,6 @@ export function AboutVisionSection() {
                 duration: 1.15,
                 ease: "power3.out",
               },
-              "-=0.35",
             )
             .fromTo(
               copy,
@@ -128,43 +104,29 @@ export function AboutVisionSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative bg-zinc-950 px-4 py-28 md:px-8 md:py-36"
+      className="relative bg-night px-4 py-28 md:px-8 md:py-36"
     >
       <div
         ref={titleRef}
         className="mx-auto max-w-3xl text-center"
       >
-        <p
-          data-credits-kicker
-          className="text-[11px] uppercase tracking-[0.36em] text-emerald-400/80"
-        >
-          WayGo · Biz Kimik · Portfolio
-        </p>
         <h2
           data-credits-title
-          className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight md:text-5xl"
+          className="font-display text-3xl font-bold leading-[1.05] tracking-tight md:text-5xl"
         >
-          Bakının Nəqliyyat Gələcəyini
-          <br />
-          Süni İntellektlə
-          <br />
-          Şəkilləndiririk
+          {s.about.title}
         </h2>
         <p
           data-credits-copy
-          className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-zinc-300 md:text-base"
+          className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-paper/75 md:text-base"
         >
-          Bakı sürücüsü ildə 120–145 saatını tıxacda itirir. Mövcud xəritələr
-          gecikir və hamını eyni küçəyə tökür. WayGo ona görə yarandı: tıxacı
-          iki saat əvvəl görəcək, axını böləcək, qənaətə görə real vauçer
-          qazandıracaq milli naviqasiya.
+          {s.about.p1}
         </p>
         <p
           data-credits-copy
-          className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-zinc-400"
+          className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-paper/60"
         >
-          Missiyamız sadədir: Bakının hərəkətini daha az gözləmə, daha az tüstü
-          və Azərbaycanda qalan data ilə yazmaq. İki həmtəsisçi, öz əlimizlə.
+          {s.about.p2}
         </p>
         <div
           data-credits-actions
@@ -173,36 +135,36 @@ export function AboutVisionSection() {
           <button
             type="button"
             onClick={() => go("#metrics")}
-            className="rounded-full border border-emerald-400 bg-emerald-400/20 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-300 shadow-neon transition hover:bg-emerald-400 hover:text-zinc-950"
+            className="rounded-full border border-leaf bg-leaf/20 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-leaf shadow-neon transition hover:bg-leaf hover:text-forest"
           >
-            Layihəmiz
+            {s.about.ctaProject}
           </button>
           <button
             type="button"
             onClick={() => go("#contact")}
-            className="rounded-full border border-emerald-400/55 bg-zinc-950/50 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-emerald-400 hover:text-emerald-400 hover:shadow-neon"
+            className="rounded-full border border-leaf/55 bg-night/50 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-leaf hover:text-leaf hover:shadow-neon"
           >
-            Bizimlə Əlaqə
+            {s.about.ctaContact}
           </button>
         </div>
       </div>
 
       <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-3">
-        {BLOCKS.map((block) => (
+        {s.about.blocks.map((block, index) => (
           <article
             key={block.n}
-            className="scene-frame group overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 transition duration-500 hover:border-emerald-400/35 hover:shadow-neon"
+            className="scene-frame group overflow-hidden rounded-3xl border border-white/10 bg-night transition duration-500 hover:border-leaf/35 hover:shadow-neon"
           >
             <div className="relative aspect-[16/10] overflow-hidden">
               <div className="h-full w-full overflow-hidden transition duration-700 ease-out group-hover:scale-[1.04]">
                 <img
-                  src={block.image}
+                  src={BLOCK_IMAGES[index]}
                   alt=""
                   className="mission-ken h-full w-full origin-center object-cover will-change-transform"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-              <p className="absolute left-5 top-4 font-display text-2xl font-bold text-emerald-400/80">
+              <p className="absolute left-5 top-4 font-display text-2xl font-bold text-leaf/80">
                 {block.n}
               </p>
             </div>
@@ -210,7 +172,7 @@ export function AboutVisionSection() {
               <h3 className="font-display text-xl font-bold text-white">
                 {block.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+              <p className="mt-3 text-sm leading-relaxed text-paper/60">
                 {block.body}
               </p>
             </div>

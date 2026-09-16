@@ -73,7 +73,7 @@ export function TiltCard({ children, className }: TiltCardProps) {
       <div
         ref={cardRef}
         className={cn(
-          "relative will-change-transform overflow-hidden rounded-3xl border border-white/10 bg-zinc-950",
+          "relative will-change-transform overflow-hidden rounded-3xl border border-white/10 bg-night",
           className,
         )}
       >

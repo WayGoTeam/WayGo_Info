@@ -4,16 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        neon: "#34d399",
+        night: "#061410",
+        forest: "#092C25",
+        grove: "#064E3B",
+        leaf: "#D3EC88",
+        paper: "#F7F8F5",
+        sky: "#0284C7",
+        neon: "#D3EC88",
       },
       fontFamily: {
-        display: ["Inter", "Manrope", "sans-serif"],
-        sans: ["Manrope", "system-ui", "sans-serif"],
+        display: ["Manrope", "Inter", "system-ui", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        neon: "0 0 24px rgba(52, 211, 153, 0.35), 0 0 64px rgba(52, 211, 153, 0.12)",
+        neon: "0 0 24px rgba(211, 236, 136, 0.28), 0 0 64px rgba(5, 150, 105, 0.16)",
         "neon-lg":
-          "0 0 40px rgba(52, 211, 153, 0.45), 0 0 120px rgba(52, 211, 153, 0.18)",
+          "0 0 40px rgba(211, 236, 136, 0.32), 0 0 120px rgba(6, 78, 59, 0.35)",
       },
     },
   },

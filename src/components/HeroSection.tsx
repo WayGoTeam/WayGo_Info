@@ -1,98 +1,80 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useLocale } from "../i18n/LocaleContext";
 import { gsap, ScrollTrigger, useGSAP } from "../lib/gsap";
-import { reelVideo, stills } from "../lib/media";
-
-const CAPTIONS = [
-  { start: 0, end: 0.17, lead: "91.6%", rest: "test R²" },
-  { start: 0.17, end: 0.26, lead: "39 dəq", rest: "adi xəritə" },
-  { start: 0.26, end: 0.34, lead: "21 dəq", rest: "WayGo" },
-  { start: 0.34, end: 0.49, lead: "EcoPoints", rest: "vauçer" },
-  { start: 0.49, end: 0.63, lead: "22%", rest: "yanacaq qənaəti" },
-  { start: 0.63, end: 1, lead: "WayGo", rest: "Bakı" },
-] as const;
-
-function captionIndex(progress: number) {
-  for (let i = CAPTIONS.length - 1; i >= 0; i -= 1) {
-    if (progress >= CAPTIONS[i].start) return i;
-  }
-  return 0;
-}
+import { reelFrames, reelVideo } from "../lib/media";
+import { useLenis } from "./SmoothScroll";
 
 export function HeroSection() {
+  const { locale, s } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
+  const cueRef = useRef<HTMLButtonElement>(null);
+  const [frameReady, setFrameReady] = useState(false);
+  const lenis = useLenis();
 
   useGSAP(
     () => {
       const video = videoRef.current;
       const section = sectionRef.current;
-      const bar = barRef.current;
-      if (!video || !section || !bar) return;
+      const cue = cueRef.current;
+      if (!video || !section || !cue) return;
 
       video.pause();
+      video.muted = true;
       video.preload = "auto";
-      video.load();
+      const snapStart = () => {
+        if (video.readyState < 1) return;
+        video.currentTime = 0;
+        setFrameReady(true);
+      };
+      snapStart();
+      video.addEventListener("loadeddata", snapStart, { once: true });
 
-      const captions = gsap.utils.toArray<HTMLElement>(".film-caption");
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(captions, { autoAlpha: 0 });
-        gsap.set(bar, { scaleX: 0, transformOrigin: "0% 50%" });
+        gsap.set(cue, { autoAlpha: 1 });
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.set(captions, { autoAlpha: 0 });
-        gsap.set(bar, { scaleX: 0, transformOrigin: "0% 50%" });
-        if (captions[0]) gsap.set(captions[0], { autoAlpha: 1 });
-
+        gsap.set(cue, { autoAlpha: 1 });
         const playhead = { p: 0 };
-        let active = 0;
 
-        const showCaption = (next: number) => {
-          if (next === active) return;
-          if (captions[active]) {
-            gsap.to(captions[active], {
-              autoAlpha: 0,
-              duration: 0.35,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
+        const apply = (p: number) => {
+          gsap.set(cue, { autoAlpha: 1 - Math.min(1, p * 2.2) });
+          if (!video.duration) return;
+          const next = p * Math.max(0, video.duration - 0.04);
+          if (Math.abs(video.currentTime - next) > 1 / 48) {
+            video.currentTime = next;
           }
-          if (captions[next]) {
-            gsap.to(captions[next], {
-              autoAlpha: 1,
-              duration: 0.45,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          }
-          active = next;
         };
 
-        gsap.to(playhead, {
+        const tween = gsap.to(playhead, {
           p: 1,
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: "+=1050%",
+            end: () => {
+              const seconds = video.duration || 10;
+              return `+=${Math.round(seconds * 780)}`;
+            },
             pin: true,
-            scrub: 1.05,
+            scrub: 0.18,
+            fastScrollEnd: true,
+            anticipatePin: 1,
             refreshPriority: 0,
           },
-          onUpdate: () => {
-            gsap.set(bar, { scaleX: playhead.p });
-            showCaption(captionIndex(playhead.p));
-
-            if (!video.duration) return;
-            const next = playhead.p * (video.duration - 0.02);
-            if (Math.abs(video.currentTime - next) > 0.004) {
-              video.currentTime = next;
-            }
-          },
+          onUpdate: () => apply(playhead.p),
         });
+
+        const onMeta = () => ScrollTrigger.refresh();
+        video.addEventListener("loadedmetadata", onMeta);
+
+        return () => {
+          video.removeEventListener("loadedmetadata", onMeta);
+          tween.kill();
+        };
       });
 
       return () => {
@@ -103,22 +85,35 @@ export function HeroSection() {
     { scope: sectionRef },
   );
 
+  const goAbout = () => {
+    if (lenis) {
+      lenis.scrollTo("#about");
+      return;
+    }
+    document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="hero"
       ref={sectionRef}
-      className="relative bg-zinc-950"
-      aria-label="WayGo giriş"
+      className="relative bg-night"
+      aria-label={s.hero.label}
     >
-      <h1 className="sr-only">
-        Bakının Nəqliyyat Gələcəyini Süni İntellektlə Şəkilləndiririk
-      </h1>
+      <h1 className="sr-only">{s.hero.title}</h1>
       <div className="relative min-h-[100svh] overflow-hidden">
+        <img
+          src={reelFrames[0]}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+            frameReady ? "opacity-100" : "opacity-0"
+          }`}
           src={reelVideo}
-          poster={stills.citySky}
+          poster={reelFrames[0]}
           muted
           playsInline
           preload="auto"
@@ -126,39 +121,32 @@ export function HeroSection() {
         />
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 z-20 h-8 bg-black md:h-10"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night via-night/20 to-transparent"
         />
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 z-20 h-8 bg-black md:h-10"
-        />
-
-        <div
-          aria-hidden
-          className="pointer-events-none absolute bottom-14 left-5 z-30 md:bottom-[4.75rem] md:left-10"
+        <button
+          ref={cueRef}
+          type="button"
+          onClick={goAbout}
+          className="hero-scroll-cue absolute inset-x-0 bottom-8 z-30 mx-auto md:bottom-12"
         >
-          {CAPTIONS.map((caption) => (
-            <p
-              key={caption.lead + caption.rest}
-              className="film-caption invisible absolute bottom-0 left-0 flex items-center gap-3 whitespace-nowrap font-display text-[10px] font-medium uppercase tracking-[0.32em] text-white/75 opacity-0 md:text-[11px]"
+          <span aria-hidden className="hero-scroll-cue__icon">
+            <svg
+              className="hero-scroll-cue__arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <span className="h-px w-5 bg-emerald-400/80 md:w-7" />
-              <span className="text-emerald-400">{caption.lead}</span>
-              <span className="text-emerald-400/45">·</span>
-              <span>{caption.rest}</span>
-            </p>
-          ))}
-        </div>
-
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[2px] bg-white/10"
-        >
-          <div
-            ref={barRef}
-            className="h-full w-full origin-left bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.65)]"
-          />
-        </div>
+              <path d="M12 5v14" />
+              <path d="M6 13l6 6 6-6" />
+            </svg>
+          </span>
+          <span className="hero-scroll-cue__label">
+            {locale === "az" ? s.hero.scrollAz : s.hero.scrollEn}
+          </span>
+        </button>
       </div>
     </section>
   );

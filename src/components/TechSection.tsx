@@ -1,48 +1,20 @@
 import { useRef } from "react";
+import { useLocale } from "../i18n/LocaleContext";
 import { stills } from "../lib/media";
 import { useSceneFrames } from "../lib/useSceneFrames";
 import { TiltCard } from "./TiltCard";
 
-const STACK = [
-  {
-    image: stills.bakuAccuracy,
-    kicker: "Model",
-    title: "LightGBM proqnoz mühərriki",
-    body: "İki saatlıq tıxac ehtimalı. Test R² 0.916. Reaksiya yox — ehtimal paylanması.",
-  },
-  {
-    image: stills.ecoRoute,
-    kicker: "Alqoritm",
-    title: "Bölünmüş marşrut",
-    body: "Valhalla yolu qiymətləndirir, WayGo tıxac və qəza cəriməsini qoyur. Axın 2–3 paralel yola bölünür.",
-  },
-  {
-    image: stills.metricsHud,
-    kicker: "Data",
-    title: "250 min Bakı qeydi",
-    body: "HUD-da yanacaq, vaxt və rayon siqnalı. FastAPI pipeline üzərində öz data qatımız.",
-  },
-  {
-    image: stills.ecoPoints,
-    kicker: "Mükafat",
-    title: "EcoPoints",
-    body: "Yaşıl sürücülük ölçülür. 1000 xal = 10 AZN yanacaq və ya enerji vauçeri.",
-  },
-  {
-    image: stills.fuelVoucher,
-    kicker: "Cüzdan",
-    title: "Real vauçer",
-    body: "Xallar kod olur. Sürücü qənaəti nağd vəd yox, yanacaq və enerji vauçeri kimi götürür.",
-  },
-  {
-    image: stills.waygoNetwork,
-    kicker: "Arxitektura",
-    title: "Milli data qatı",
-    body: "Spring Boot, React, FastAPI. Nəsimi, Yasamal, Səbail. Məlumat Azərbaycanda qalır.",
-  },
+const STACK_IMAGES = [
+  stills.bakuAccuracy,
+  stills.ecoRoute,
+  stills.metricsHud,
+  stills.ecoPoints,
+  stills.fuelVoucher,
+  stills.waygoNetwork,
 ];
 
 export function TechSection() {
+  const { s } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   useSceneFrames(sectionRef, 3);
 
@@ -50,41 +22,37 @@ export function TechSection() {
     <section
       id="tech"
       ref={sectionRef}
-      className="relative bg-zinc-950 px-4 py-28 md:px-8 md:py-36"
+      className="relative bg-night px-4 py-28 md:px-8 md:py-36"
     >
       <div className="scene-frame mx-auto max-w-3xl text-center">
-        <p className="text-[11px] uppercase tracking-[0.36em] text-emerald-400/80">
-          03 · Texnologiyamız
-        </p>
-        <h2 className="mt-4 font-display text-3xl font-bold md:text-5xl">
-          Öz mühərrik, öz data, öz qaydalar.
+        <h2 className="font-display text-3xl font-bold md:text-5xl">
+          {s.tech.title}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base">
-          Proqnoz, marşrut cəriməsi, EcoPoints və Azərbaycanda qalan data —
-          hamısı öz kodumuzdur.
+        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-paper/60 md:text-base">
+          {s.tech.lead}
         </p>
       </div>
 
       <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {STACK.map((item) => (
+        {s.tech.items.map((item, index) => (
           <div key={item.title} className="scene-frame">
-            <TiltCard className="h-full overflow-hidden bg-zinc-950 p-0">
+            <TiltCard className="h-full overflow-hidden bg-night p-0">
               <div className="relative aspect-[16/10]">
                 <img
-                  src={item.image}
+                  src={STACK_IMAGES[index]}
                   alt=""
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
               </div>
               <div className="p-6">
-                <p className="text-[10px] uppercase tracking-[0.24em] text-emerald-400/70">
+                <p className="text-[10px] uppercase tracking-[0.24em] text-leaf/70">
                   {item.kicker}
                 </p>
                 <h3 className="mt-2 font-display text-xl font-bold text-white">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+                <p className="mt-3 text-sm leading-relaxed text-paper/60">
                   {item.body}
                 </p>
               </div>

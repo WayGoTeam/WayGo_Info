@@ -1,8 +1,10 @@
 import { useRef } from "react";
-import { stills } from "../lib/media";
+import { CONTACT_EMAIL, CONTACT_LINKEDIN } from "../i18n/strings";
+import { useLocale } from "../i18n/LocaleContext";
 import { useSceneFrames } from "../lib/useSceneFrames";
 
 export function ContactSection() {
+  const { s } = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   useSceneFrames(sectionRef, 5);
 
@@ -10,39 +12,38 @@ export function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative overflow-hidden bg-zinc-950 px-4 py-32 md:px-8 md:py-40"
+      className="relative overflow-hidden bg-night px-4 py-32 md:px-8 md:py-40"
     >
-      <img
-        src={stills.waygoNetwork}
-        alt=""
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(211,236,136,0.18),transparent_58%)]"
       />
-      <div className="absolute inset-0 bg-zinc-950/72" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-grove/40 blur-3xl"
+      />
 
-      <div className="scene-frame relative z-10 mx-auto max-w-3xl rounded-[2rem] border border-emerald-400/25 bg-zinc-950/60 px-8 py-20 text-center shadow-neon-lg backdrop-blur-md md:px-14 md:py-24">
-        <p className="text-[11px] uppercase tracking-[0.4em] text-emerald-400/80">
-          05 · Əlaqə
-        </p>
-        <h2 className="mt-6 font-display text-3xl font-bold tracking-tight md:text-5xl">
-          Bakının növbəti hərəkət qatına yazın.
+      <div className="scene-frame relative z-10 mx-auto max-w-3xl rounded-[2rem] border border-leaf/25 bg-forest/70 px-8 py-20 text-center shadow-neon-lg backdrop-blur-md md:px-14 md:py-24">
+        <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
+          {s.contact.title}
         </h2>
-        <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-zinc-300">
-          Demo, data room və term sheet üçün — bir məktub kifayətdir.
+        <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-paper/75">
+          {s.contact.lead}
         </p>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="mailto:hello@waygo.az"
-            className="inline-flex rounded-full border border-emerald-400 bg-emerald-400/15 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-emerald-300 shadow-neon-lg transition hover:bg-emerald-400 hover:text-zinc-950 hover:shadow-neon-lg"
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="inline-flex rounded-full border border-leaf bg-leaf/15 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-leaf shadow-neon-lg transition hover:bg-leaf hover:text-forest hover:shadow-neon-lg"
           >
-            hello@waygo.az
+            {s.contact.cta}
           </a>
           <a
-            href="https://github.com/WayGoTeam"
+            href={CONTACT_LINKEDIN}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex rounded-full border border-white/20 bg-zinc-950/40 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-zinc-200 transition hover:border-emerald-400/60 hover:text-emerald-300"
+            className="inline-flex rounded-full border border-white/20 bg-night/40 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-paper/85 transition hover:border-leaf/60 hover:text-leaf"
           >
-            GitHub
+            {s.contact.linkedin}
           </a>
         </div>
       </div>

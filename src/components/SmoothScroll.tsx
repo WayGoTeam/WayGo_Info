@@ -27,13 +27,13 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     }
 
     const instance = new Lenis({
-      lerp: 0.052,
+      lerp: 0.12,
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.58,
+      wheelMultiplier: 0.78,
       syncTouch: true,
-      touchMultiplier: 1.05,
+      touchMultiplier: 1.15,
     });
 
     instance.on("scroll", ScrollTrigger.update);

@@ -12,4 +12,15 @@ export const stills = {
   muzaqil: "/media/muzaqil-hesenli.jpg",
 } as const;
 
-export const reelVideo = "/media/waygo-city-sky.mp4?v=120";
+export const reelFrames = [
+  "/media/reel/01.jpg",
+  "/media/reel/02.jpg",
+  "/media/reel/03.jpg",
+  "/media/reel/04.jpg",
+  "/media/reel/05.jpg",
+  "/media/reel/06.jpg",
+  "/media/reel/07.jpg",
+  "/media/reel/08.jpg",
+] as const;
+
+export const reelVideo = "/media/hero-reel-scrub.mp4";
