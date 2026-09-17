@@ -2,7 +2,7 @@ export type Locale = "az" | "en";
 
 export const CONTACT_EMAIL = "mikayilquliyev16@gmail.com";
 export const CONTACT_LINKEDIN =
-  "https://www.linkedin.com/in/mikayil-guliyev-341275306";
+  "https://www.linkedin.com/company/138734134";
 
 export const LIVE_APP_URL = "https://waygo.duckdns.org";
 
