@@ -26,7 +26,7 @@ export function Navbar() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-40">
-      <div className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-8">
+      <div className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-4 md:px-8 md:py-5">
         <button
           type="button"
           onClick={() => go("#hero")}
@@ -35,7 +35,7 @@ export function Navbar() {
           <img
             src={stills.waygoLogo}
             alt="WayGo"
-            className="h-12 w-auto object-contain object-left md:h-14"
+            className="h-10 w-auto object-contain object-left md:h-14"
           />
         </button>
 

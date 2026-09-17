@@ -25,7 +25,13 @@ export function AboutVisionSection() {
 
       const mm = gsap.matchMedia();
 
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
+      mm.add("(max-width: 767px)", () => {
+        gsap.set([heading, ...copy, actions].filter(Boolean), { autoAlpha: 1, y: 0 });
+      });
+
+      mm.add(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        () => {
         if (heading && actions) {
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -66,7 +72,8 @@ export function AboutVisionSection() {
               "-=0.4",
             );
         }
-      });
+        },
+      );
 
       return () => mm.revert();
     },

@@ -21,8 +21,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const desktop = window.matchMedia(
+      "(min-width: 768px) and (hover: hover) and (pointer: fine)",
+    ).matches;
 
-    if (reduceMotion) {
+    if (reduceMotion || !desktop) {
       return;
     }
 
@@ -32,7 +35,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 0.78,
-      syncTouch: true,
+      syncTouch: false,
       touchMultiplier: 1.15,
     });
 

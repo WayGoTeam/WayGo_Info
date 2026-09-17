@@ -19,63 +19,91 @@ export function HeroSection() {
       const cue = cueRef.current;
       if (!video || !section || !cue) return;
 
-      video.pause();
       video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
       video.preload = "auto";
-      const snapStart = () => {
-        if (video.readyState < 1) return;
-        video.currentTime = 0;
-        setFrameReady(true);
-      };
+      const snapStart = () => setFrameReady(true);
       snapStart();
       video.addEventListener("loadeddata", snapStart, { once: true });
 
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        video.pause();
         gsap.set(cue, { autoAlpha: 1 });
       });
 
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.set(cue, { autoAlpha: 1 });
-        const playhead = { p: 0 };
+      mm.add(
+        "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          gsap.set(cue, { autoAlpha: 1 });
+          video.loop = true;
+          const play = () => {
+            void video.play().catch(() => undefined);
+          };
+          play();
+          video.addEventListener("canplay", play);
+          const unlock = () => play();
+          window.addEventListener("touchstart", unlock, { passive: true });
+          window.addEventListener("click", unlock);
+          return () => {
+            video.removeEventListener("canplay", play);
+            window.removeEventListener("touchstart", unlock);
+            window.removeEventListener("click", unlock);
+            video.pause();
+          };
+        },
+      );
 
-        const apply = (p: number) => {
-          gsap.set(cue, { autoAlpha: 1 - Math.min(1, p * 2.2) });
-          if (!video.duration) return;
-          const next = p * Math.max(0, video.duration - 0.04);
-          if (Math.abs(video.currentTime - next) > 1 / 48) {
-            video.currentTime = next;
-          }
-        };
+      mm.add(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          video.pause();
+          video.loop = false;
+          video.currentTime = 0;
+          gsap.set(cue, { autoAlpha: 1 });
+          const playhead = { p: 0 };
 
-        const tween = gsap.to(playhead, {
-          p: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => {
-              const seconds = video.duration || 10;
-              return `+=${Math.round(seconds * 780)}`;
+          const apply = (p: number) => {
+            gsap.set(cue, { autoAlpha: 1 - Math.min(1, p * 2.2) });
+            if (!video.duration) return;
+            const next = p * Math.max(0, video.duration - 0.04);
+            if (Math.abs(video.currentTime - next) > 1 / 48) {
+              video.currentTime = next;
+            }
+          };
+
+          const tween = gsap.to(playhead, {
+            p: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: () => {
+                const seconds = video.duration || 10;
+                return `+=${Math.round(seconds * 780)}`;
+              },
+              pin: true,
+              scrub: 0.18,
+              fastScrollEnd: true,
+              anticipatePin: 1,
+              refreshPriority: 0,
             },
-            pin: true,
-            scrub: 0.18,
-            fastScrollEnd: true,
-            anticipatePin: 1,
-            refreshPriority: 0,
-          },
-          onUpdate: () => apply(playhead.p),
-        });
+            onUpdate: () => apply(playhead.p),
+          });
 
-        const onMeta = () => ScrollTrigger.refresh();
-        video.addEventListener("loadedmetadata", onMeta);
+          const onMeta = () => ScrollTrigger.refresh();
+          video.addEventListener("loadedmetadata", onMeta);
 
-        return () => {
-          video.removeEventListener("loadedmetadata", onMeta);
-          tween.kill();
-        };
-      });
+          return () => {
+            video.removeEventListener("loadedmetadata", onMeta);
+            tween.kill();
+          };
+        },
+      );
 
       return () => {
         mm.revert();
