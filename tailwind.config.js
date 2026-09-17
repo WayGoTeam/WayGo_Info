@@ -17,8 +17,8 @@ export default {
         sans: ["Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        neon: "0 0 24px rgba(211, 236, 136, 0.28), 0 0 64px rgba(5, 150, 105, 0.16)",
-        "neon-lg":
+        glow: "0 0 24px rgba(211, 236, 136, 0.28), 0 0 64px rgba(5, 150, 105, 0.16)",
+        "glow-lg":
           "0 0 40px rgba(211, 236, 136, 0.32), 0 0 120px rgba(6, 78, 59, 0.35)",
       },
     },

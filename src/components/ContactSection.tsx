@@ -23,7 +23,7 @@ export function ContactSection() {
         className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-grove/40 blur-3xl"
       />
 
-      <div className="scene-frame relative z-10 mx-auto max-w-3xl rounded-[2rem] border border-leaf/25 bg-forest/70 px-8 py-20 text-center shadow-neon-lg backdrop-blur-md md:px-14 md:py-24">
+      <div className="scene-frame relative z-10 mx-auto max-w-3xl rounded-[2rem] border border-leaf/25 bg-forest/70 px-8 py-20 text-center shadow-glow-lg backdrop-blur-md md:px-14 md:py-24">
         <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
           {s.contact.title}
         </h2>
@@ -33,7 +33,7 @@ export function ContactSection() {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="inline-flex rounded-full border border-leaf bg-leaf/15 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-leaf shadow-neon-lg transition hover:bg-leaf hover:text-forest hover:shadow-neon-lg"
+            className="inline-flex rounded-full border border-leaf bg-leaf/15 px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-leaf shadow-glow-lg transition hover:bg-leaf hover:text-forest hover:shadow-glow-lg"
           >
             {s.contact.cta}
           </a>

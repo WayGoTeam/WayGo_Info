@@ -22,7 +22,6 @@ export function AboutVisionSection() {
       const heading = titleRoot.querySelector<HTMLElement>("[data-credits-title]");
       const copy = titleRoot.querySelectorAll<HTMLElement>("[data-credits-copy]");
       const actions = titleRoot.querySelector<HTMLElement>("[data-credits-actions]");
-      const images = gsap.utils.toArray<HTMLElement>(".mission-ken");
 
       const mm = gsap.matchMedia();
 
@@ -67,24 +66,6 @@ export function AboutVisionSection() {
               "-=0.4",
             );
         }
-
-        images.forEach((img) => {
-          gsap.fromTo(
-            img,
-            { scale: 1 },
-            {
-              scale: 1.06,
-              duration: 11,
-              ease: "none",
-              scrollTrigger: {
-                trigger: img.closest("article") ?? img,
-                start: "top 88%",
-                toggleActions: "play none none reverse",
-                refreshPriority: 1,
-              },
-            },
-          );
-        });
       });
 
       return () => mm.revert();
@@ -135,14 +116,14 @@ export function AboutVisionSection() {
           <button
             type="button"
             onClick={() => go("#metrics")}
-            className="rounded-full border border-leaf bg-leaf/20 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-leaf shadow-neon transition hover:bg-leaf hover:text-forest"
+            className="rounded-full border border-leaf bg-leaf/20 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-leaf shadow-glow transition hover:bg-leaf hover:text-forest"
           >
             {s.about.ctaProject}
           </button>
           <button
             type="button"
             onClick={() => go("#contact")}
-            className="rounded-full border border-leaf/55 bg-night/50 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-leaf hover:text-leaf hover:shadow-neon"
+            className="rounded-full border border-leaf/55 bg-night/50 px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-leaf hover:text-leaf hover:shadow-glow"
           >
             {s.about.ctaContact}
           </button>
@@ -153,14 +134,14 @@ export function AboutVisionSection() {
         {s.about.blocks.map((block, index) => (
           <article
             key={block.n}
-            className="scene-frame group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-night transition duration-500 hover:border-leaf/35 hover:shadow-neon"
+            className="scene-frame group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-night transition duration-500 hover:border-leaf/35 hover:shadow-glow"
           >
             <div className="relative aspect-[16/10] shrink-0 overflow-hidden">
               <div className="h-full w-full overflow-hidden transition duration-700 ease-out group-hover:scale-[1.04]">
                 <img
                   src={BLOCK_IMAGES[index]}
                   alt=""
-                  className="mission-ken h-full w-full origin-center object-cover will-change-transform"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
