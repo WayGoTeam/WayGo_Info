@@ -23,4 +23,4 @@ export const reelFrames = [
   "/media/reel/08.jpg",
 ] as const;
 
-export const reelVideo = "/media/hero-reel-scrub.mp4";
+export const reelVideo = "/media/hero-reel-scrub.mp4?v=2";
